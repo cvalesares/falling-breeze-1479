@@ -4,4 +4,7 @@ RSpec.describe Garden do
   describe 'relationships' do
     it { should have_many(:plots) }
   end
+
+  describe '#long_harvest' do
+  end 
 end

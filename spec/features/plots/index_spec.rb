@@ -4,8 +4,8 @@ RSpec.describe 'Plots Index Page' do
 
   before :each do
     @garden1 = Garden.create!(name: "Tiny Garden", organic: true)
-    @plot1 = Plot.create!(number: 1, size: "Small", direction: "North", garden_id: @garden1.id)
-    @plot2 = Plot.create!(number: 2, size: "Medium", direction: "South", garden_id: @garden1.id)
+    @plot1 = @garden1.plots.create!(number: 1, size: "Small", direction: "North", garden_id: @garden1.id)
+    @plot2 = @garden1.plots.create!(number: 2, size: "Medium", direction: "South", garden_id: @garden1.id)
     @plant1 = @plot1.plants.create!(name: "Rose", description: "Red", days_to_harvest: 13, plots_id: @plot1.id)
     @plant2 = @plot1.plants.create!(name: "Lilly", description: "White", days_to_harvest: 12, plots_id: @plot1.id)
     @plant3 = @plot2.plants.create!(name: "Watermelon", description: "Green", days_to_harvest: 32, plots_id: @plot2.id)
@@ -33,6 +33,7 @@ RSpec.describe 'Plots Index Page' do
     visit "/plots"
     save_and_open_page
     click_link "Remove #{@plant1.name}"
+
     expect(current_path).to eq("/plots")
     expect(page).to_not have_content(@plant1.name)
   end
