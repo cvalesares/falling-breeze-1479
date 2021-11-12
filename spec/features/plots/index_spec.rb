@@ -10,8 +10,8 @@ RSpec.describe 'Plots Index Page' do
     @plant2 = @plot1.plants.create!(name: "Lilly", description: "White", days_to_harvest: 12, plots_id: @plot1.id)
     @plant3 = @plot2.plants.create!(name: "Watermelon", description: "Green", days_to_harvest: 32, plots_id: @plot2.id)
   end
-  it 'has a list of all plot numbers' do
 
+  it 'has a list of all plot numbers' do
     visit "/plots"
 
     expect(page).to have_content(@plot1.number)
@@ -24,6 +24,7 @@ RSpec.describe 'Plots Index Page' do
       expect(page).to have_content(@plant1.name)
       expect(page).to have_content(@plant2.name)
     end
+
     within "#id-#{@plot2.id}" do
       expect(page).to have_content(@plant3.name)
     end
@@ -31,7 +32,7 @@ RSpec.describe 'Plots Index Page' do
 
   it 'can remove a plant from the index page' do
     visit "/plots"
-    save_and_open_page
+    
     click_link "Remove #{@plant1.name}"
 
     expect(current_path).to eq("/plots")

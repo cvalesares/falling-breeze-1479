@@ -2,9 +2,9 @@
 
 <% @plots.each do |plot| %>
   <div id="id-<%= plot.id %>">
-  <%= plot.number %> <br>
+  Plot # <%= plot.number %> <br>
   <% plot.plants.each do |plant| %>
-    <%= plant.name %>
+    Plant: <%= plant.name %>
     <%= link_to "Remove #{plant.name}", "/plots", method: :delete %><br>
   <% end %>
   </div>
